@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class PmsBrandController {
     @ApiOperation("获取所有品牌列表")
     @GetMapping("listAll")
     @ResponseBody
+    @PreAuthorize("hasAuthority('pms:brand:read')")
     public CommonResult<List<PmsBrand>> getBrandList() {
         return CommonResult.success(pmsBrandService.listAllBrand());
     }
@@ -41,6 +43,7 @@ public class PmsBrandController {
     @ApiOperation("添加品牌")
     @PostMapping("/create")
     @ResponseBody
+    @PreAuthorize("hasAuthority('pms:brand:create')")
     public CommonResult createBrand(@RequestBody PmsBrand pmsBrand) {
         CommonResult commonResult;
         int count = pmsBrandService.createBrand(pmsBrand);
@@ -53,9 +56,11 @@ public class PmsBrandController {
         }
         return commonResult;
     }
+
     @ApiOperation("更新指定id品牌信息")
     @PostMapping("/updated/{id}")
     @ResponseBody
+    @PreAuthorize("hasAuthority('pms:brand:write')")
     public CommonResult updateBrand(@PathVariable("id") Long id, @RequestBody PmsBrand pmsBrandDto, BindingResult result) {
         CommonResult commonResult;
         int count = pmsBrandService.updateBrand(id, pmsBrandDto);
@@ -68,9 +73,11 @@ public class PmsBrandController {
         }
         return commonResult;
     }
+
     @ApiOperation("删除指定id的品牌")
     @GetMapping("/delete/{id}")
     @ResponseBody
+    @PreAuthorize("hasAuthority('pms:brand:delete')")
     public CommonResult deleteBrand(@PathVariable("id") Long id) {
         int count = pmsBrandService.deleteBrand(id);
         if (count == 1) {
@@ -81,17 +88,21 @@ public class PmsBrandController {
             return CommonResult.failed("操作失败");
         }
     }
+
     @ApiOperation("分页查询品牌列表")
     @GetMapping("/list")
     @ResponseBody
+    @PreAuthorize("hasAuthority('pms:brand:read')")
     public CommonResult<CommonPage<PmsBrand>> listBrand(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                                         @RequestParam(value = "pageSize", defaultValue = "3") Integer pageSize) {
         List<PmsBrand> brandList = pmsBrandService.listBrand(pageNum, pageSize);
         return CommonResult.success(CommonPage.restPage(brandList));
     }
+
     @ApiOperation("获取指定id的品牌详情")
     @GetMapping("/{id}")
     @ResponseBody
+    @PreAuthorize("hasAuthority('pms:brand:read')")
     public CommonResult<PmsBrand> brand(@PathVariable("id") Long id) {
         return CommonResult.success(pmsBrandService.getBrand(id));
     }

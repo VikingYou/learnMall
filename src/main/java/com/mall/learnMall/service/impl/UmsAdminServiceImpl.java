@@ -9,12 +9,9 @@ import com.mall.learnMall.mbg.model.UmsAdminExample;
 import com.mall.learnMall.mbg.model.UmsPermission;
 import com.mall.learnMall.service.UmsAdminService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -29,7 +26,6 @@ import java.util.List;
 
 /**
  * UmsAdminService实现类
- * Created by macro on 2018/4/26.
  */
 @Service
 @Slf4j
