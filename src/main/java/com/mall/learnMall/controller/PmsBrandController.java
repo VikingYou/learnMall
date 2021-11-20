@@ -6,6 +6,7 @@ import com.mall.learnMall.mbg.model.PmsBrand;
 import com.mall.learnMall.service.PmsBrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,7 @@ import java.util.List;
  * @date 2021/11/16
  * @time 22:11
  */
-@Api(tags = "PmsBrandController", description = "商品品牌管理")
+@Api(value = "PmsBrandController", tags = {"商品品牌管理"})
 @Controller
 @Slf4j
 @RequestMapping("/brand")
